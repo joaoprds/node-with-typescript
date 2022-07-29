@@ -1,0 +1,17 @@
+{{>partials/header}}
+
+    {{#showWelcome}}
+        Ola meu consagrado {{ user }}
+    {{/showWelcome}}
+
+    <hr/>
+
+    <h2>Produtos</h2>
+
+    <ul>
+        {{#products}}
+            <li>{{title}} - R${{price}}</li>
+        {{/products}}
+    </ul>
+
+{{>partials/footer}}

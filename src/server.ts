@@ -1,7 +1,10 @@
 import express, { Request, Response} from 'express';
 import path from 'path';
 import mustache from 'mustache-express'
+import dotenv from 'dotenv'
 import MainRoutes from './routes/index';
+
+dotenv.config();
 
 const server = express();
 
@@ -10,10 +13,12 @@ server.set('views', path.join(__dirname, 'views'));
 server.engine('mustache', mustache());
 
 server.use(express.static(path.join(__dirname, '../public')));
+
+server.use(express.urlencoded({ extended: true })); //habilitar em pegar os dados via post na minha rota
 server.use(MainRoutes);
 
 
 server.use((req: Request, res: Response) =>{
     res.status(404).send('Pagina Não Encontrada');
 });
-server.listen(5000);
+server.listen(process.env.PORT);
